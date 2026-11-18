@@ -1,0 +1,41 @@
+{# Layout dashboard admin.
+Nested inheritance: base.html -> admin/base_admin.html -> admin/dashboard.html #}
+{% extends "base.html" %}
+
+{% block title %}Dashboard Admin{% endblock %}
+
+{% block content %}
+<div class="row g-0">
+
+  <!-- SIDEBAR: navigasi admin (otomatis disembunyikan di layar HP) -->
+  <aside class="col-md-3 col-lg-2 d-none d-md-block sidebar">
+    <div class="sidebar-judul">Menu Admin</div>
+    <a href="{{ url_for('admin_dashboard') }}" class="{{ 'active' if request.endpoint == 'admin_dashboard' }}">
+      <i class="bi bi-speedometer2 me-2"></i>Dashboard
+    </a>
+    <a href="{{ url_for('nilai') }}">
+      <i class="bi bi-journal-text me-2"></i>Nilai Matakuliah
+    </a>
+    <a href="{{ url_for('ipk') }}">
+      <i class="bi bi-graph-up me-2"></i>Rekap IPK
+    </a>
+    <div class="sidebar-judul mt-3">Website</div>
+    <a href="{{ url_for('index') }}">
+      <i class="bi bi-box-arrow-up-right me-2"></i>Lihat Profil
+    </a>
+  </aside>
+
+  <!-- AREA KONTEN: topbar (judul + nama admin) + isi halaman -->
+  <section class="col-md-9 col-lg-10 p-4">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+      <h2 class="fw-bold mb-0">{% block judul %}{% endblock %}</h2>
+      <span class="badge bg-primary-subtle text-primary-emphasis border border-primary-subtle py-2 px-3">
+        <i class="bi bi-person-circle me-1"></i>{{ profil.nama }} — Admin
+      </span>
+    </div>
+
+    {% block admin_content %}{% endblock %}
+  </section>
+
+</div>
+{% endblock %}

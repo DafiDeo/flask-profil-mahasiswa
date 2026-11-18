@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}Nilai Matakuliah{% endblock %}
+{% block content %}
+
+<section class="container py-5" id="nilai">
+  <div class="text-center reveal">
+    <h2 class="judul-section">Nilai Matakuliah</h2>
+  </div>
+
+  <div class="row justify-content-center reveal">
+    <div class="col-lg-10">
+
+      <!-- Pencarian + filter (interaksi JavaScript) -->
+      <div class="row g-2 mb-3">
+        <div class="col-md-7">
+          <div class="input-group">
+            <span class="input-group-text"><i class="bi bi-search"></i></span>
+            <input type="text" id="inputCari" class="form-control" placeholder="Cari nama / kode matakuliah...">
+          </div>
+        </div>
+        <div class="col-md-5">
+          <select id="pilihNilai" class="form-select">
+            <option value="semua">Semua Nilai</option>
+            <option value="A">Hanya A</option>
+            <option value="AB">Hanya AB</option>
+            <option value="B">Hanya B</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="tabel-custom table-responsive">
+        <table class="table table-striped table-hover align-middle mb-0">
+          <thead>
+            <tr class="text-center">
+              <th>No</th>
+              <th>Kode MK</th>
+              <th>Nama Matakuliah</th>
+              <th>SKS</th>
+              <th>Nilai Huruf</th>
+              <th>Bobot</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <!-- Data TIDAK ditulis manual di HTML:
+               baris dirender script.js dari array of object (createElement) -->
+          <tbody id="isiTabelNilai" class="text-center"></tbody>
+        </table>
+      </div>
+
+      <!-- Ringkasan dinamis (template literal oleh script.js) -->
+      <p id="infoStatistik" class="text-muted text-center mt-3 mb-0"></p>
+
+      <!-- Form tambah matakuliah (validasi + preventDefault) -->
+      <div class="card mt-4 border-0 shadow-sm">
+        <div class="card-body p-4">
+          <h5 class="fw-bold mb-3"><i class="bi bi-plus-circle me-2"></i>Tambah Matakuliah Baru</h5>
+
+          <div id="pesanSukses" class="alert alert-success py-2 d-none">
+            <i class="bi bi-check-circle me-1"></i>Matakuliah berhasil ditambahkan!
+          </div>
+
+          <form id="formTambahMK" class="row g-3" novalidate>
+            <div class="col-md-3">
+              <label class="form-label">Kode MK</label>
+              <input type="text" id="inputKode" class="form-control" placeholder="cth: SIF107">
+              <div class="invalid-feedback">Kode MK wajib diisi.</div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Nama Matakuliah</label>
+              <input type="text" id="inputNamaMK" class="form-control" placeholder="cth: REKAYASA PERANGKAT LUNAK">
+              <div class="invalid-feedback">Nama minimal 4 huruf.</div>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">SKS</label>
+              <input type="number" id="inputSks" class="form-control" placeholder="1-6">
+              <div class="invalid-feedback">SKS harus 1 - 6.</div>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Nilai</label>
+              <select id="inputNilai" class="form-select">
+                <option value="">-- pilih --</option>
+                <option value="A">A</option>
+                <option value="AB">AB</option>
+                <option value="B">B</option>
+              </select>
+              <div class="invalid-feedback">Nilai wajib dipilih.</div>
+            </div>
+            <div class="col-12 text-end">
+              <button type="submit" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>Tambah</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

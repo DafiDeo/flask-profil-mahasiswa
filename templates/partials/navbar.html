@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="{{ url_for('index') }}">
+      <i class="bi bi-mortarboard-fill me-2"></i>Profil Mahasiswa
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menuNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+
+        {# daftar menu: (nama endpoint, label) #}
+        {% set menu = [
+        ("index", "Beranda"),
+        ("nilai", "Nilai Matakuliah"),
+        ("ipk", "IPK"),
+        ("admin_dashboard", "Dashboard")
+        ] %}
+
+        {% for endpoint, label in menu %}
+        <li class="nav-item">
+          <a class="nav-link {{ 'active' if request.endpoint == endpoint }}" href="{{ url_for(endpoint) }}">{{ label
+            }}</a>
+        </li>
+        {% endfor %}
+
+        <li class="nav-item">
+          <button class="btn btn-outline-info btn-sm ms-lg-3 mt-2 mt-lg-0" data-bs-toggle="modal"
+            data-bs-target="#modalKontak">
+            <i class="bi bi-envelope me-1"></i>Kontak
+          </button>
+        </li>
+        <li class="nav-item mt-2 mt-lg-0">
+          <button id="tombolMode" class="btn btn-outline-info btn-sm ms-lg-2">
+            <i class="bi bi-moon-stars-fill me-1"></i>Mode Gelap
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

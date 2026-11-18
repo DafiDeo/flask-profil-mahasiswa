@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}IPK{% endblock %}
+{% block content %}
+
+<section class="container py-5" id="ipk">
+  <div class="text-center reveal">
+    <h2 class="judul-section">Indeks Prestasi Kumulatif (IPK)</h2>
+  </div>
+
+  <div class="row g-4 justify-content-center reveal">
+
+    <!-- Kartu IPK (angka dari data Python) -->
+    <div class="col-lg-4">
+      <div class="kartu-ipk text-center p-5 h-100">
+        <i class="bi bi-graph-up-arrow fs-1 mb-2"></i>
+        <p class="mb-0 opacity-75">IPK Saat Ini</p>
+        <div class="angka-ipk">{{ profil.ipk }}</div>
+        <div class="progress mb-2">
+          <div class="progress-bar bg-info" style="width: 86%;"></div>
+        </div>
+        <small class="opacity-75">Skala 0.00 - 4.00</small>
+      </div>
+    </div>
+
+    <!-- Rekap semester: baris dirender script.js dari array of object -->
+    <div class="col-lg-7">
+      <div class="tabel-custom table-responsive">
+        <table class="table table-striped table-hover text-center mb-0">
+          <thead>
+            <tr>
+              <th>Semester</th>
+              <th>SKS Diambil</th>
+              <th>IP Semester</th>
+              <th>IPK Kumulatif</th>
+            </tr>
+          </thead>
+          <tbody id="isiTabelSemester"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

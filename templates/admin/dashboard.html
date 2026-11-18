@@ -1,0 +1,61 @@
+{# Dashboard admin: stat card & tabel dirender dari list Python (app.py) #}
+{% extends "admin/base_admin.html" %}
+{% block judul %}Dashboard{% endblock %}
+{% block admin_content %}
+
+<!-- STAT CARDS (minimal 3 — di sini 4 kartu, datanya dihitung Python) -->
+<div class="row g-3">
+  {% for s in statistik %}
+  <div class="col-6 col-lg-3">
+    <div class="card text-bg-{{ s.warna }} h-100 shadow-sm stat-hover">
+      <div class="card-body text-center py-4">
+        <i class="bi {{ s.ikon }} fs-2"></i>
+        <h3 class="fw-bold mt-2 mb-0">{{ s.nilai }}</h3>
+        <p class="mb-0">{{ s.label }}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- TABEL DATA MATAKULIAH (dari list Python, akan diganti database di pertemuan 14) -->
+<div class="tabel-custom table-responsive mt-4">
+  <table class="table table-striped table-hover align-middle mb-0">
+    <thead>
+      <tr class="text-center">
+        <th>No</th>
+        <th>Kode MK</th>
+        <th>Nama Matakuliah</th>
+        <th>SKS</th>
+        <th>Nilai</th>
+        <th>Bobot</th>
+        <th>Keterangan</th>
+      </tr>
+    </thead>
+    <tbody class="text-center">
+      {% for mk in matakuliah %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ mk.kode }}</td>
+        <td class="text-start">{{ mk.nama }}</td>
+        <td>{{ mk.sks }}</td>
+        <td><span class="badge badge-nilai bg-nilai-{{ mk.nilai|lower }}">{{ mk.nilai }}</span></td>
+        <td>{{ "{:.2f}".format(mk.bobot) }}</td>
+        <!-- ekspresi kondisional Jinja (pola sama seperti contoh PPT) -->
+        <td>{{ "Predikat Tertinggi" if mk.bobot == 4.0 else ("Baik Sekali" if mk.bobot >= 3.5 else "Baik") }}</td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="7" class="text-center text-muted py-4">Belum ada data matakuliah.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<small class="text-muted d-block mt-2">
+  <i class="bi bi-info-circle me-1"></i>
+  Data sementara disimpan dalam list Python (app.py) — akan diganti dengan database pada pertemuan 14.
+</small>
+
+{% endblock %}
