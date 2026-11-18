@@ -485,5 +485,3 @@ antarmahasiswa menyebabkan nilai dibagi 2).
 ---
 
 © 2026 — Dafi Deo Ananda Nurrokhim · NBI 1482500040 · PSBW / FTEIC / Untag Surabaya
-#   f l a s k - p r o f i l - m a h a s i s w a  
- 
