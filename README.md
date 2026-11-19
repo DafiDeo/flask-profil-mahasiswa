@@ -1,15 +1,17 @@
 # Website Profil Mahasiswa — Versi Flask
 
 **Tugas Individu 6 — Pengembangan Situs Web (PSBW)**
-Pertemuan 11: Integrasi HTML & CSS dengan Flask
-Lanjutan Tugas Individu 1–2 (Bootstrap + JavaScript DOM + jQuery)
 
-| Identitas | |
+Pertemuan 11: Integrasi HTML & CSS dengan Flask.
+
+## Profil
+
+| Keterangan | Data |
 |---|---|
-| Nama | **Dafi Deo Ananda Nurrokhim** |
-| NBI | **1482500040** |
+| Nama | Dafi Deo |
+| NBI | 0040 |
 | Program Studi | S1 Sistem dan Teknologi Informasi |
-| Fakultas | Fakultas Teknologi Elektro dan Informatika Cerdas (FTEIC) |
+| Fakultas | FTEIC |
 | Kampus | Universitas 17 Agustus 1945 Surabaya |
 
 ---
@@ -485,7 +487,3 @@ antarmahasiswa menyebabkan nilai dibagi 2).
 ---
 
 © 2026 — Dafi Deo Ananda Nurrokhim · NBI 1482500040 · PSBW / FTEIC / Untag Surabaya
-#   f l a s k - p r o f i l - m a h a s i s w a  
- #   f l a s k - p r o f i l - m a h a s i s w a  
- #   f l a s k - p r o f i l - m a h a s i s w a  
- 
