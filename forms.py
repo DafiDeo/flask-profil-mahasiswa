@@ -1,24 +1,3 @@
-"""
-FORMS.PY — TUGAS INDIVIDU 7
-Definisi form class dengan Flask-WTF (Form class, validator, proteksi CSRF).
-Nama : Dafi Deo Ananda Nurrokhim
-NBI  : 1482500040
-
-Dua form sesuai soal Tugas Individu 7:
-1. KontakForm    -> form kontak/pemesanan untuk PUBLIK (halaman /kontak)
-2. MatakuliahForm-> form TAMBAH DATA di DASHBOARD ADMIN (halaman /admin)
-
-Jenis validator berbeda yang dipakai (minimal 4 sesuai soal):
-- DataRequired : field wajib diisi
-- Length       : batas panjang karakter (min/max)
-- Email        : format email valid (butuh paket email-validator)
-- Regexp       : pola teks untuk kode matakuliah
-- NumberRange  : batas angka (SKS 1-6)
-
-Setiap form FlaskForm otomatis menyisipkan token CSRF melalui
-form.hidden_tag() di template, sehingga semua form terlindungi CSRF.
-"""
-
 from flask_wtf import FlaskForm
 from wtforms import (
     StringField, TextAreaField, IntegerField, SelectField, SubmitField
@@ -35,7 +14,6 @@ PILIHAN_NILAI = [
 
 
 class KontakForm(FlaskForm):
-    """Form kontak publik: pengunjung mengirim pesan ke mahasiswa."""
 
     nama = StringField("Nama", validators=[
         DataRequired(message="Nama wajib diisi"),
@@ -55,8 +33,6 @@ class KontakForm(FlaskForm):
 
 
 class MatakuliahForm(FlaskForm):
-    """Form tambah data matakuliah di dashboard admin (dari live coding PPT,
-    diadaptasi ke studi kasus project: tambah matakuliah ke list Python)."""
 
     kode = StringField("Kode MK", validators=[
         DataRequired(message="Kode matakuliah wajib diisi"),

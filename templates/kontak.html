@@ -1,0 +1,79 @@
+{# Tugas Individu 7 — form kontak publik dengan Flask-WTF.
+   form.hidden_tag() menyisipkan token CSRF otomatis.
+   Error tampil di bawah field (invalid-feedback), input yang benar
+   tetap terisi karena WTForms mengisi ulang form dari data yang dikirim. #}
+{% extends "base.html" %}
+
+{% block title %}Kontak{% endblock %}
+
+{% block content %}
+<section class="container py-5" id="kontak">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-xl-7">
+
+      <!-- KEPALA HALAMAN -->
+      <div class="text-center mb-4">
+        <div class="ikon-kartu ikon-cyan mx-auto mb-3"><i class="bi bi-envelope-paper-heart"></i></div>
+        <h1 class="fw-bold">Hubungi Saya</h1>
+        <p class="text-muted mb-0">
+          Ada pertanyaan, ide project, atau sekadar ingin menyapa?
+          Kirim pesan lewat form di bawah — semua data diproses Flask di sisi server.
+        </p>
+      </div>
+
+      <!-- FORM KONTAK (Flask-WTF: KontakForm) -->
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-4 p-md-5">
+          <form method="POST" action="{{ url_for('kontak') }}" novalidate>
+
+            {# token CSRF wajib — tanpa ini Flask-WTF menolak POST (400 Bad Request) #}
+            {{ form.hidden_tag() }}
+
+            <!-- NAMA: DataRequired + Length(3-50) -->
+            <div class="mb-3">
+              {{ form.nama.label(class="form-label fw-semibold") }}
+              {{ form.nama(class="form-control" + (" is-invalid" if form.nama.errors else ""),
+                            placeholder="contoh: Budi Santoso") }}
+              {% for e in form.nama.errors %}
+              <div class="invalid-feedback">{{ e }}</div>
+              {% endfor %}
+            </div>
+
+            <!-- EMAIL: DataRequired + Email (validasi format server-side) -->
+            <div class="mb-3">
+              {{ form.email.label(class="form-label fw-semibold") }}
+              {{ form.email(type="email",
+                            class="form-control" + (" is-invalid" if form.email.errors else ""),
+                            placeholder="name@example.com") }}
+              {% for e in form.email.errors %}
+              <div class="invalid-feedback">{{ e }}</div>
+              {% endfor %}
+            </div>
+
+            <!-- PESAN: DataRequired + Length(10-500) -->
+            <div class="mb-4">
+              {{ form.pesan.label(class="form-label fw-semibold") }}
+              {{ form.pesan(class="form-control" + (" is-invalid" if form.pesan.errors else ""),
+                            rows="5", placeholder="tulis pesan minimal 10 karakter...") }}
+              {% for e in form.pesan.errors %}
+              <div class="invalid-feedback">{{ e }}</div>
+              {% endfor %}
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 py-2">
+              <i class="bi bi-send me-2"></i>{{ form.submit.label.text }}
+            </button>
+          </form>
+        </div>
+        <div class="card-footer bg-white border-0 text-center pb-4">
+          <small class="text-muted">
+            <i class="bi bi-shield-check me-1"></i>
+            Form ini dilindungi token CSRF Flask-WTF (disisipkan otomatis oleh form.hidden_tag()).
+          </small>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

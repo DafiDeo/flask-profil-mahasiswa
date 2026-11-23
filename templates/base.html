@@ -18,6 +18,21 @@
   <!-- NAVBAR (partial terpisah, memuat menu aktif dinamis) -->
   {% include "partials/navbar.html" %}
 
+  <!-- FLASH MESSAGES (Tugas Individu 7 — tampil sekali di request berikutnya,
+       kategori flash -> warna alert Bootstrap: success/danger/warning/info) -->
+  {% with pesan = get_flashed_messages(with_categories=true) %}
+    {% if pesan %}
+    <div class="container mt-3">
+      {% for kategori, isi in pesan %}
+      <div class="alert alert-{{ kategori }} alert-dismissible fade show shadow-sm" role="alert">
+        <i class="bi {{ 'bi-check-circle-fill' if kategori == 'success' else 'bi-exclamation-triangle-fill' }} me-2"></i>{{ isi }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Tutup"></button>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  {% endwith %}
+
   <!-- KONTEN TIAP HALAMAN (diisi child template) -->
   {% block content %}{% endblock %}
 
